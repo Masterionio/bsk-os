@@ -1,0 +1,20 @@
+/* Custom Installer Branding */
+
+/* This sets the background color of the sidebar */
+@define-color product_bg_color #C300FF; 
+@define-color product_sidebar_bg_color #C300FF;
+
+/* Applies the color to the sidebar area */
+.logo-sidebar {
+    background-color: @product_sidebar_bg_color;
+}
+
+/* Ensures the text on the sidebar remains readable (White) */
+.logo-sidebar label {
+    color: #ffffff;
+}
+
+/* Optional: Add a border or divider if you want */
+.logo-sidebar {
+    border-right: 1px solid #333333;
+}
