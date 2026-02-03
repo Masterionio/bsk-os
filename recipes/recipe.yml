@@ -31,13 +31,9 @@ modules:
   - type: script
     scripts:
       - name: set-default-zone
-        run: |
-          firewall-cmd --set-default-zone=bsk-aggressive
-          firewall-cmd --reload
+        run: "firewall-cmd --set-default-zone=bsk-aggressive && firewall-cmd --reload"
 
   - type: script
     scripts:
       - name: enable-firewalld
-        run: |
-          systemctl enable firewalld
-          systemctl start firewalld
+        run: "systemctl enable firewalld && systemctl start firewalld"
