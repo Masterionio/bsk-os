@@ -1,12 +1,21 @@
+name: BlueBuild
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build with BlueBuild
+      - name: BlueBuild
         uses: blue-build/github-action@v1
         with:
           recipe: ./recipes/recipe.yml
-          push: false   # set to true if you want to push to GHCR
