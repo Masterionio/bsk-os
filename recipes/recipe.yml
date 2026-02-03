@@ -30,6 +30,3 @@ modules:
           - org.gnome.Loupe
       - scope: user
         install: []
-
-  - type: signing
-    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-bsk
