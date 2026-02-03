@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <short>BSK Aggressive</short>
+  <description>Drop everything by default, rate-limit and log aggressively</description>
+  <target>DROP</target>
+
+  <!-- HTTP limited to 10 requests per minute, log incoming -->
+  <rule family="ipv4">
+    <service name="http"/>
+    <limit value="10/m"/>
+    <log prefix="INCOMING HTTP REQUEST RECEIVED: "/>
+    <accept/>
+  </rule>
+
+  <!-- SSH logged and accepted -->
+  <rule family="ipv4">
+    <service name="ssh"/>
+    <log prefix="SSH ATTEMPT RECEIVED: "/>
+    <accept/>
+  </rule>
+
+  <!-- ICMP echo requests blocked and logged -->
+  <rule family="ipv4">
+    <icmp-block name="echo-request"/>
+    <log prefix="ICMP BLOCKED: "/>
+  </rule>
+
+  <!-- Generic rate-limit: if traffic exceeds 25 packets/minute, drop -->
+  <rule family="ipv4">
+    <limit value="25/m"/>
+    <drop/>
+  </rule>
+</zone>
