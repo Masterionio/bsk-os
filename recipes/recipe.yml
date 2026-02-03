@@ -1,39 +1,38 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
 name: bsk-os
-# description will be included in the image's metadata
 description: Hardened COSMIC computer for BSK.
 
-# the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/secureblue/cosmic-main-hardened
-image-version: 43 # latest is also supported if you want new updates ASAP
+image-version: 43
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
   - type: files
+    files:
+      # This explicitly tells the builder where to map your branding files
+      - usr: /usr
+      - etc: /etc
+
   - type: rpm-ostree
     repos:
-       - https://copr.fedorainfracloud.org
-        - atim/starship
+      # Use the single, full URL for the Starship COPR repo
+      - https://copr.fedorainfracloud.org
     install:
-        - micro
-        - starship
+      # Use a list of packages directly, without the "packages:" keyword
+      - micro
+      - starship
     remove:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+      # Use a list of packages directly, without the "packages:" keyword
+      - firefox
+      - firefox-langpacks
 
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
+        install:
           - org.mozilla.firefox
           - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+      - scope: user
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: signing
