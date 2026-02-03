@@ -1,28 +1,12 @@
-name: Build BSK OS
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install BlueBuild
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip install blue-build
-
-      - name: Validate recipe
-        run: bluebuild validate ./recipes/recipe.yml
-
-      - name: Build image
-        run: bluebuild build ./recipes/recipe.yml
+      - name: Build with BlueBuild
+        uses: blue-build/github-action@v1
+        with:
+          recipe: ./recipes/recipe.yml
+          push: false   # set to true if you want to push to GHCR
