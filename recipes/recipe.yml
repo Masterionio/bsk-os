@@ -11,22 +11,33 @@ modules:
     files:
       - usr: /usr
       - etc: /etc
-
+      - etc/firewalld/zones/bsk-aggressive.xml: /etc/firewalld/zones/bsk-aggressive.xml
+      
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
     install:
       - micro
       - starship
-    remove:
-      - firefox
-      - firefox-langpacks
 
   - type: default-flatpaks
     configurations:
       - scope: system
         install:
-          - org.mozilla.firefox
           - org.gnome.Loupe
       - scope: user
         install: []
+
+  - type: script
+    scripts:
+      - name: set-default-zone
+        run: |
+          firewall-cmd --set-default-zone=bsk-aggressive
+          firewall-cmd --reload
+
+  - type: script
+    scripts:
+      - name: enable-firewalld
+        run: |
+          systemctl enable firewalld
+          systemctl start firewalld
