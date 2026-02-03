@@ -9,30 +9,27 @@ image-version: 43
 modules:
   - type: files
     files:
-      # This explicitly tells the builder where to map your branding files
       - usr: /usr
       - etc: /etc
 
   - type: rpm-ostree
     repos:
-      # Use the single, full URL for the Starship COPR repo
-      - https://copr.fedorainfracloud.org
+      - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
     install:
-      # Use a list of packages directly, without the "packages:" keyword
       - micro
       - starship
     remove:
-      # Use a list of packages directly, without the "packages:" keyword
       - firefox
       - firefox-langpacks
 
   - type: default-flatpaks
     configurations:
-      - notify: true
-        scope: system
+      - scope: system
         install:
           - org.mozilla.firefox
           - org.gnome.Loupe
       - scope: user
+        install: []
 
   - type: signing
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-bsk
