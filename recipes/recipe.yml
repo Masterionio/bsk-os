@@ -15,14 +15,12 @@ modules:
   - type: files
   - type: rpm-ostree
     repos:
-      copr:
+       - https://copr.fedorainfracloud.org
         - atim/starship
     install:
-      packages:
         - micro
         - starship
     remove:
-      packages:
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
