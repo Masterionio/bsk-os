@@ -31,3 +31,9 @@ modules:
           - org.gnome.Loupe
       - scope: user
         install: []
+
+signing:
+  type: cosign
+  algorithm: ecdsa
+  public_key: ./cosign.pub
+  private_key: ./cosign.key
