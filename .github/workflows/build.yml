@@ -15,6 +15,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Debug step to confirm secrets are injected
+      - name: Debug Cosign secrets
+        run: |
+          if [ -z "$COSIGN_PRIVATE_KEY" ]; then
+            echo "COSIGN_PRIVATE_KEY is EMPTY"
+          else
+            echo "COSIGN_PRIVATE_KEY length: ${#COSIGN_PRIVATE_KEY}"
+          fi
+
+          if [ -z "$COSIGN_PASSWORD" ]; then
+            echo "COSIGN_PASSWORD is EMPTY"
+          else
+            echo "COSIGN_PASSWORD length: ${#COSIGN_PASSWORD}"
+          fi
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+
       - name: BlueBuild
         uses: blue-build/github-action@v1
         with:
