@@ -19,3 +19,6 @@ jobs:
         uses: blue-build/github-action@v1
         with:
           recipe: ./recipes/recipe.yml
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
