@@ -48,3 +48,9 @@ jobs:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }} 
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: bsk-os-iso
+          path: ./output/bsk-os.iso
