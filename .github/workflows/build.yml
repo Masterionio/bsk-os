@@ -15,7 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Debug step to confirm secrets are injected
       - name: Debug Cosign secrets
         run: |
           if [ -z "$SIGNING_SECRET" ]; then
@@ -31,6 +30,11 @@ jobs:
           fi
         env:
           SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
+      - name: Write cosign.key from secret
+        run: echo "$COSIGN_PRIVATE_KEY" > cosign.key
+        env:
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
 
       - name: BlueBuild
