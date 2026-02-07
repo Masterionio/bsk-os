@@ -41,6 +41,6 @@ jobs:
         uses: blue-build/github-action@v1
         with:
           recipe: ./recipes/recipe.yml
-        env:
-          SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }} 
+          registry_token: ${{ github.token }}
+          pr_event_number: ${{ github.event.number }}
