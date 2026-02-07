@@ -15,28 +15,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Debug step to confirm secrets are injected
-      - name: Debug Cosign secrets
+      # Debug step to confirm secret is injected
+      - name: Debug Cosign secret
         run: |
-          if [ -z "$COSIGN_PRIVATE_KEY" ]; then
-            echo "COSIGN_PRIVATE_KEY is EMPTY"
+          if [ -z "$SIGNING_SECRET" ]; then
+            echo "SIGNING_SECRET is EMPTY"
           else
-            echo "COSIGN_PRIVATE_KEY length: ${#COSIGN_PRIVATE_KEY}"
-          fi
-
-          if [ -z "$COSIGN_PASSWORD" ]; then
-            echo "COSIGN_PASSWORD is EMPTY"
-          else
-            echo "COSIGN_PASSWORD length: ${#COSIGN_PASSWORD}"
+            echo "SIGNING_SECRET length: ${#SIGNING_SECRET}"
           fi
         env:
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
 
       - name: BlueBuild
         uses: blue-build/github-action@v1
         with:
           recipe: ./recipes/recipe.yml
         env:
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
