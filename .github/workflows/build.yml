@@ -40,7 +40,7 @@ jobs:
       - name: BlueBuild
         uses: blue-build/github-action@v1
         with:
-          recipe: ./recipes/recipe.yml
+          recipe: recipe.yml
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }} 
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
