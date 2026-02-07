@@ -31,7 +31,3 @@ modules:
           - org.gnome.Loupe
       - scope: user
         install: []
-
-signing:
-  type: cosign
-  public_key: ./cosign.pub
