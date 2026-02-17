@@ -19,11 +19,8 @@ modules:
     - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
   install:
     - package: micro
-      repo: fedora
     - package: firewalld
-      repo: fedora
     - package: starship
-      repo: atim-starship
       
   - type: default-flatpaks
     configurations:
