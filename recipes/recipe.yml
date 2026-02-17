@@ -17,7 +17,7 @@ modules:
   # Install extra packages via rpm-ostree
   - type: dnf
     repos:
-      - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
+      - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
     install:
       - micro
       - starship
