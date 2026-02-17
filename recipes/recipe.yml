@@ -13,16 +13,13 @@ modules:
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
 
   - type: dnf
-    # Package management uses direct lists, not 'package:' keys
     install:
-      - micro
-      - firewalld
-      - starship
+      - package: micro
+      - package: firewalld
+      - package: starship
     repos:
-      # Use 'copr' key for COPR repositories
       copr:
         - atim/starship
-      # Use 'files' key if you need to point to a specific .repo URL
       files:
         - https://download.fedoraproject.org
         - https://download.fedoraproject.org
