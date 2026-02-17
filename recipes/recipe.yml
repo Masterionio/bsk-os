@@ -14,12 +14,9 @@ modules:
       
   - type: dnf
   - repos:
-    - id: fedora
-      source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
-    - id: updates
-      source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
-    - id: atim-starship
-      source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
+    - source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
+    - source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
+    - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
   install:
     - package: micro
       repo: fedora
