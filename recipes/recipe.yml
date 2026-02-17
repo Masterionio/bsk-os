@@ -12,7 +12,7 @@ modules:
       - etc/firewalld/firewalld.conf: /etc/firewalld/firewalld.conf
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
       
- - type: dnf
+  - type: dnf
   repos:
     - id: fedora
       source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
