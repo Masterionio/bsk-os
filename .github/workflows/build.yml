@@ -48,3 +48,35 @@ jobs:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }} 
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
+  
+  
+  build-iso:
+    runs-on: ubuntu-latest
+    needs: build # Only runs if the main build succeeds
+    if: github.event_name != 'pull_request' # Usually recommended to only build ISOs on main branch pushes
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate ISO
+        uses: jasonn3/build-container-installer@v1.2.4
+        with:
+          # This should match your ghcr.io image path
+          image-name: ${{ github.event.repository.name }}
+          image-repo: ghcr.io/${{ github.repository_owner }}
+          image-tag: latest # Or ${{ github.sha }} if you want a specific build
+          
+          # This version matches the Fedora base (43 in your case)
+          version: 43
+          
+          # Optional: customize the ISO filename
+          iso-name: bsk-os-alpha.iso
+          
+          # This allows the ISO to be downloaded from the Action run
+          variant: 'COSMIC' # Matches your DE
+
+      - name: Upload ISO as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bsk-os-iso
+          path: ./*.iso
