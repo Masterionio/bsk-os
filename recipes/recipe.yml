@@ -2,28 +2,32 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: bsk-os
 description: Hardened COSMIC computer for BSK.
-
 base-image: ghcr.io/secureblue/cosmic-main-hardened
 image-version: 43
 
 modules:
-  # Copy your aggressive firewall zone and config files
   - type: files
     files:
       - etc/firewalld/zones/bsk-aggressive.xml: /etc/firewalld/zones/bsk-aggressive.xml
       - etc/firewalld/firewalld.conf: /etc/firewalld/firewalld.conf
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
-
-  # Install extra packages via rpm-ostree
-  - type: dnf
-    repos:
-      - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
-    install:
-      - package: micro
-      - package: starship
-      - package: firewalld
-
-  # Default Flatpaks for system and user scopes
+      
+ - type: dnf
+  repos:
+    - id: fedora
+      source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
+    - id: updates
+      source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
+    - id: atim-starship
+      source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
+  install:
+    - package: micro
+      repo: fedora
+    - package: firewalld
+      repo: fedora
+    - package: starship
+      repo: atim-starship
+      
   - type: default-flatpaks
     configurations:
       - scope: system
