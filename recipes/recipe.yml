@@ -14,14 +14,12 @@ modules:
 
   - type: dnf
     install:
-      - micro
-      - firewalld
-      - starship
+      - package: micro
+      - package: firewalld
+      - package: starship
     repos:
       files:
         - https://copr.fedorainfracloud.org
-        - https://download.fedoraproject.org
-        - https://download.fedoraproject.org
 
   - type: default-flatpaks
     configurations:
