@@ -19,7 +19,8 @@ modules:
         - starship
     repos:
       copr:
-        - atim/starship
+        - name: atim/starship
+          chroot: fedora-43-x86_64
 
   - type: default-flatpaks
     configurations:
