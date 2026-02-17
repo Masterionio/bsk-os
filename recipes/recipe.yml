@@ -13,14 +13,17 @@ modules:
       - etc/firewalld/firewalld.conf: /etc/firewalld/firewalld.conf
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
       
-  - type: dnf
+   - type: dnf
     repos:
-      - https://copr.fedorainfracloud.org
+      copr:
+        - name: atim/starship # Example: owner/project format
+        - name: varlad/micro   # Use the specific project name
+        
     install:
       - micro
       - starship
       - firewalld
-      - openssl   # Required for integrity check
+
 
   - type: default-flatpaks
     configurations:
