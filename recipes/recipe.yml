@@ -4,25 +4,32 @@ name: bsk-os
 description: Hardened COSMIC computer for BSK.
 base-image: ghcr.io/secureblue/cosmic-main-hardened
 image-version: 43
+
 modules:
   - type: files
     files:
       - etc/firewalld/zones/bsk-aggressive.xml: /etc/firewalld/zones/bsk-aggressive.xml
       - etc/firewalld/firewalld.conf: /etc/firewalld/firewalld.conf
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
+
   - type: dnf
-    repos:
-      - source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
-      - source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
-      - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
-    packages: # Changed from 'install' with 'package:' keys
+    # Package management uses direct lists, not 'package:' keys
+    install:
       - micro
       - firewalld
       - starship
+    repos:
+      # Use 'copr' key for COPR repositories
+      copr:
+        - atim/starship
+      # Use 'files' key if you need to point to a specific .repo URL
+      files:
+        - https://download.fedoraproject.org
+        - https://download.fedoraproject.org
+
   - type: default-flatpaks
     configurations:
       - scope: system
-        # 'install' key now directly contains the list of package IDs
         install:
           - org.gnome.Loupe
       - scope: user
