@@ -67,7 +67,7 @@ jobs:
           image-tag: latest # Or ${{ github.sha }} if you want a specific build
           
           # This version matches the Fedora base (43 in your case)
-          version: 41
+          version: 43
           
           # Optional: customize the ISO filename
           iso-name: bsk-os-alpha.iso
