@@ -13,14 +13,14 @@ modules:
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
       
   - type: dnf
-  - repos:
-    - source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
-    - source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
-    - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
-  - install:
-    - package: micro
-    - package: firewalld
-    - package: starship
+    repos:
+      - source: https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/
+      - source: https://download.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/
+      - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
+    install:
+      - package: micro
+      - package: firewalld
+      - package: starship
       
   - type: default-flatpaks
     configurations:
