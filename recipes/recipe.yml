@@ -1,3 +1,4 @@
+---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: bsk-os
 description: Hardened COSMIC computer for BSK.
