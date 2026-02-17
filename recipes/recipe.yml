@@ -19,9 +19,9 @@ modules:
     repos:
       - source: https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-43/atim-starship-fedora-43.repo
     install:
-      - micro
-      - starship
-      - firewalld   # ensure firewalld is present in the image
+      - package: micro
+      - package: starship
+      - package: firewalld
 
   # Default Flatpaks for system and user scopes
   - type: default-flatpaks
