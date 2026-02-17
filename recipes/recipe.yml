@@ -13,18 +13,20 @@ modules:
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
 
   - type: dnf
-    # Switching to 'packages' and ensuring it is a list of strings
-    packages:
+    install:
       - micro
       - firewalld
       - starship
-    # Moving repos to their own specialized module if dnf continues to fail
-    # or using the simplest valid repo format:
     repos:
-      - https://copr.fedorainfracloud.org
+      files:
+        - https://copr.fedorainfracloud.org
+        - https://download.fedoraproject.org
+        - https://download.fedoraproject.org
 
   - type: default-flatpaks
     configurations:
       - scope: system
         install:
           - org.gnome.Loupe
+      - scope: user
+        install: []
