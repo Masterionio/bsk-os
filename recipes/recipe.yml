@@ -13,12 +13,7 @@ modules:
       - etc/firewalld/firewalld.conf: /etc/firewalld/firewalld.conf
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
       
-      # Gatekeeper System Files
-      - usr/bin/bsk-gatekeeper.sh: /usr/bin/bsk-gatekeeper.sh
-      - etc/systemd/system/bsk-gatekeeper.service: /etc/systemd/system/bsk-gatekeeper.service
-      - etc/systemd/system-preset/00-bsk-gatekeeper.preset: /etc/systemd/system-preset/00-bsk-gatekeeper.preset
-
-  - type: rpm-ostree
+  - type: dnf
     repos:
       - https://copr.fedorainfracloud.org
     install:
