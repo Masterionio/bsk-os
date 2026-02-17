@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# yaml-language-server: $schema=https://schema.blue-build.org
 name: bsk-os
 description: Hardened COSMIC computer for BSK.
 base-image: ghcr.io/secureblue/cosmic-main-hardened
@@ -13,21 +13,18 @@ modules:
       - etc/systemd/system-preset/99-bsk-firewalld.preset: /etc/systemd/system-preset/99-bsk-firewalld.preset
 
   - type: dnf
-    install:
-      - package: micro
-      - package: firewalld
-      - package: starship
+    # Switching to 'packages' and ensuring it is a list of strings
+    packages:
+      - micro
+      - firewalld
+      - starship
+    # Moving repos to their own specialized module if dnf continues to fail
+    # or using the simplest valid repo format:
     repos:
-      copr:
-        - atim/starship
-      files:
-        - https://download.fedoraproject.org
-        - https://download.fedoraproject.org
+      - https://copr.fedorainfracloud.org
 
   - type: default-flatpaks
     configurations:
       - scope: system
         install:
           - org.gnome.Loupe
-      - scope: user
-        install: []
