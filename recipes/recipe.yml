@@ -3,7 +3,7 @@
 name: bsk-os
 description: Hardened COSMIC computer for BSK.
 base-image: ghcr.io/secureblue/cosmic-main-hardened
-image-version: 41  # Note: Fedora 43 does not exist yet; changed to 41 (or use 40).
+image-version: 43
 modules:
   - type: files
     files:
@@ -19,7 +19,7 @@ modules:
         - starship
     repos:
       copr:
-        - atim/starship  # Correct way to add the starship COPR repo
+        - atim/starship
 
   - type: default-flatpaks
     configurations:
