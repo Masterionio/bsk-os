@@ -79,7 +79,7 @@ jobs:
           enable_cache_skopeo: true
           
           # --- Registry Auth ---
-          reg_token: ${{ github.token }}
+          registry_token: ${{ github.token }}
       - name: Upload ISO as artifact
         uses: actions/upload-artifact@v4
         with:
