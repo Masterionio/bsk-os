@@ -58,7 +58,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Generate ISO
-        uses: jasonn3/build-container-installer@v1.2.4
+        uses: jasonn3/build-container-installer@v1.4.0
         with:
           image_name: bsk-os
           image_repo: ghcr.io/${{ github.repository_owner }}
@@ -77,11 +77,8 @@ jobs:
           # --- Caching ---
           enable_cache_dnf: true
           enable_cache_skopeo: true
-          
-          # --- Registry Auth ---
-          registry_token: ${{ github.token }}
       - name: Upload ISO as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: bsk-os-iso
           path: ./*.iso
