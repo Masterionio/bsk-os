@@ -58,23 +58,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+     steps:
       - name: Generate ISO
-        uses: jasonn3/build-container-installer@v1.2.4
+        uses: blue-build/iso-action@v1.2
         with:
-          # This should match your ghcr.io image path
-          image-name: ${{ github.event.repository.name }}
-          image-repo: ghcr.io/${{ github.repository_owner }}
-          image-tag: latest # Or ${{ github.sha }} if you want a specific build
+          image_name: bsk-os
+          image_repo: ghcr.io/${{ github.repository_owner }}
+          image_tag: 43
+          iso_name: bsk-os-alpha.iso
+          variant: COSMIC
+          version: 43 # Required for F43 compatibility currently
           
-          # This version matches the Fedora base (43 in your case)
-          version: 43
+          # --- Signing & Secure Boot ---
+          image_signed: true
+          # Replace with your actual public key URL (usually in your repo root)
+          secure_boot_key_url: https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/main/cosign.pub
+          # This password is used to enroll the key into your BIOS/MOK on first boot
+          enrollment_password: universalblue 
           
-          # Optional: customize the ISO filename
-          iso-name: bsk-os-alpha.iso
+          # --- Caching ---
+          enable_cache_dnf: true
+          enable_cache_skopeo: true
           
-          # This allows the ISO to be downloaded from the Action run
-          variant: 'COSMIC' # Matches your DE
-
+          # --- Registry Auth ---
+          reg_token: ${{ github.token }}
       - name: Upload ISO as artifact
         uses: actions/upload-artifact@v4
         with:
