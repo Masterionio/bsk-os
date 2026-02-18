@@ -57,8 +57,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-     steps:
       - name: Generate ISO
         uses: blue-build/iso-action@v1.2
         with:
@@ -72,9 +70,9 @@ jobs:
           # --- Signing & Secure Boot ---
           image_signed: true
           # Replace with your actual public key URL (usually in your repo root)
-          secure_boot_key_url: https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/raw/main/cosign.pub
+          secure_boot_key_url: https://github.com/Masterionio/bsk-os/blob/main/cosign.pub
           # This password is used to enroll the key into your BIOS/MOK on first boot
-          enrollment_password: universalblue 
+          enrollment_password: universalblue
           
           # --- Caching ---
           enable_cache_dnf: true
