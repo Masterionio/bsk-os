@@ -61,7 +61,7 @@ jobs:
         uses: jasonn3/build-container-installer@v1.4.0
         with:
           image_name: bsk-os
-          image_repo: ghcr.io/${{ github.repository_owner }}
+          image_repo: ghcr.io/$masterionio
           image_tag: 43
           iso_name: bsk-os-alpha.iso
           variant: COSMIC
@@ -70,7 +70,7 @@ jobs:
           # --- Signing & Secure Boot ---
           image_signed: true
           # Replace with your actual public key URL (usually in your repo root)
-          secure_boot_key_url: https://github.com/Masterionio/bsk-os/blob/main/cosign.pub
+          secure_boot_key_url: https://github.com/masterionio/bsk-os/blob/main/cosign.pub
           # This password is used to enroll the key into your BIOS/MOK on first boot
           enrollment_password: universalblue
           
