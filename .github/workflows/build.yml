@@ -56,7 +56,7 @@ jobs:
     if: github.event_name != 'pull_request' # Usually recommended to only build ISOs on main branch pushes
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Generate ISO
         uses: jasonn3/build-container-installer@v1.4.0
         with:
@@ -66,13 +66,14 @@ jobs:
           iso_name: bsk-os-alpha.iso
           variant: COSMIC
           version: 43 # Required for F43 compatibility currently
+          web_ui: true
           
           # --- Signing & Secure Boot ---
           image_signed: true
           # Replace with your actual public key URL (usually in your repo root)
           secure_boot_key_url: https://github.com/Masterionio/bsk-os/blob/main/cosign.pub
           # This password is used to enroll the key into your BIOS/MOK on first boot
-          enrollment_password: universalblue
+          enrollment_password: BSKos12894
           
           # --- Caching ---
           enable_cache_dnf: true
