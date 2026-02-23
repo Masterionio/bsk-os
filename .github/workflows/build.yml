@@ -60,13 +60,13 @@ jobs:
       - name: Generate ISO
         uses: jasonn3/build-container-installer@v1.4.0
         with:
-          image_name: bsk-os
+          image_name: bsk-os_alpha
           image_repo: ghcr.io/masterionio
           image_tag: 43
           iso_name: bsk-os-alpha.iso
           variant: COSMIC
           version: 43 # Required for F43 compatibility currently
-          web_ui: true
+          web_ui: false
           
           # --- Signing & Secure Boot ---
           image_signed: true
@@ -81,5 +81,5 @@ jobs:
       - name: Upload ISO as artifact
         uses: actions/upload-artifact@v6
         with:
-          name: bsk-os-iso
+          name: bsk-os-iso_alpha_v1.00.0
           path: ./*.iso
