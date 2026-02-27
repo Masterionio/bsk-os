@@ -85,7 +85,7 @@ jobs:
           enable_cache_dnf: true
           enable_cache_skopeo: true
       - name: Upload ISO as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: bsk-os-iso_alpha_v1.00.0
           path: ./*.iso
